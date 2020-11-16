@@ -1,0 +1,3 @@
+OAUTH Client ID: 558742445350-figlhcpusonrbpq7ocslhg67imlnqsbv.apps.googleusercontent.com
+Client Secret: U31d3iHStTkYL3mtGGbumZz1
+
