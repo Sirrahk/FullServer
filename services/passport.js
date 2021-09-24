@@ -16,8 +16,7 @@ passport.serializeUser((user, done) =>{
 //Taking the id previously stuffed into the cookie and turning it back into a user model.
 
 passport.deserializeUser((id, done) => {
-    User.findById(id)
-    .then(user => {
+    User.findById(id).then(user => {
         done(null, user);
     });
 });

@@ -11,4 +11,14 @@ module.exports = (app) => {
 
     //Handles the case when the user goes to /auth/google/callback, which sends the request to passport to authenticate the user(exchanges the generated code for their profile info (handshake id))
     app.get('/auth/google/callback', passport.authenticate('google'));
+
+    app.get('/api/logout', (req, res) => {
+    //Automaticall
+        req.logout();
+        res.send(req.user)
+    });
+
+    app.get('/api/current_user', (req, res) => {
+        res.send(req.user);
+    });
 };

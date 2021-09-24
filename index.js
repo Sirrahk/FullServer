@@ -12,13 +12,25 @@ require('./services/passport');
 //whenever our app first boots up all te user collection info will load and be created
 
 //Mongoose connect method
-mongoose.connect(keys.mongoURI,{
-    useNewUrlParser: true,
-    useCreateIndex: true,
+mongoose.connect(keys.mongoURI, {
     useUnifiedTopology: true,
+    useNewUrlParser: true,
+    
 });
 
 const app = express();
+
+app.use(
+    cookieSession({
+        //maxAge: how long this cookie can exist in the browser until it expires. 30 days needs to be passed as milliseconds
+        maxAge: 30 * 24 * 60 *60 * 1000,
+        //encrypting the cookie so that people cant manually change the userID
+        keys: [keys.cookieKey] //providing multiple keys
+    })
+);
+//Tell passport that it should make use of cookies to handle authentication
+app.use(passport.initialize());
+app.use(passport.session());
 //ROUTES
 //this immediately invokes/calls the authRoutes function that was called in. 
 require('./routes/authRoutes')(app);
