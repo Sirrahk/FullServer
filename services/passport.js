@@ -27,7 +27,8 @@ passport.use(
     {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
+        callbackURL: '/auth/google/callback',
+        proxy: true
     }, 
 //This is the checking if a user profile exists and if not creating a user
     (accessToken, refreshToken, profile, done) => {
