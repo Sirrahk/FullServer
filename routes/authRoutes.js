@@ -2,7 +2,7 @@
 const passport = require('passport');
 
 //Route handler, attempt to authenticate user, using the strategy Google, (obtains the code generated when the user clicks on the account to sign in)
-module.exports = (app) => {
+module.exports = app => {
     app.get('/auth/google', passport.authenticate('google', {
         //asking google to give us access to user profile and email. There are different scopes (permissions) that you can ask for
         scope: ['profile', 'email']
@@ -13,7 +13,6 @@ module.exports = (app) => {
     app.get('/auth/google/callback', passport.authenticate('google'));
 
     app.get('/api/logout', (req, res) => {
-    //Automaticall
         req.logout();
         res.send(req.user)
     });

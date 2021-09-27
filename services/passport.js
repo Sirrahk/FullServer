@@ -28,7 +28,7 @@ passport.use(
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
         callbackURL: '/auth/google/callback',
-        proxy: true
+        proxy: true,
     }, 
 //This is the checking if a user profile exists and if not creating a user
     (accessToken, refreshToken, profile, done) => {
@@ -50,12 +50,11 @@ passport.use(
                         //Once the new record is saved then the done function can be triggered
                     }
                 })
-       
+       //Console.log statements to test if the user information is being grabbed
                 console.log('accessToken', accessToken);
                 console.log('refreshToken', refreshToken);
                 console.log('profile', profile);     }
         )
     );
        
-        //Console.log statements to test if the user information is being grabbed
-        /**/
+        
