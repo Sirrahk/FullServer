@@ -12,11 +12,7 @@ require('./services/passport');
 //whenever our app first boots up all te user collection info will load and be created
 
 //Mongoose connect method
-mongoose.connect(keys.mongoURI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    
-});
+mongoose.connect(keys.mongoURI);
 
 const app = express();
 
