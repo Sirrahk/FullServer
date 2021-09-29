@@ -31,30 +31,22 @@ passport.use(
         proxy: true,
     }, 
 //This is the checking if a user profile exists and if not creating a user
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
 
         //Initiating a Query to find a users record in the collection
-        User.findOne({googleId: profile.id}).then((existingUser) => {
-                if(existingUser) {
-                    //Checking if we already have a record with the given profile ID
-                    //provide two arguments to the done function, done(error argument, user record)
-                    done(null, existingUser);
-                    //if we have it, that means no error and the record is the existingUser in our mongodb
-                } else{
-                    //We don't have a user record with this ID, make a new record
-
-                     //Calling save(), saves that record, asynchronous operation
-                    
-                    new User({googleId: profile.id}).save()
-                        .then(user => done(null, user));
-                        //Once the new record is saved then the done function can be triggered
-                    }
+       const existingUser =   await User.findOne({googleId: profile.id})
+            if(existingUser) {
+                    //Checking if we already have a cord with the given profile ID
+                return done(null, existingUser);
+                    //if we have it, that means no error(null) and the record is the existingUser in our mongodb
+                } 
+                //If there is no user record with this ID, make a new record
+ 
+                const user = await new User({googleId: profile.id}).save()
+                        done(null, user);
+                         //Calling save(), saves that record, Once the new record is saved then the done function can be triggered
                 })
-       //Console.log statements to test if the user information is being grabbed
-                console.log('accessToken', accessToken);
-                console.log('refreshToken', refreshToken);
-                console.log('profile', profile);     }
-        )
-    );
+     );
+
        
         
