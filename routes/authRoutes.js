@@ -10,7 +10,15 @@ module.exports = app => {
     );
 
     //Handles the case when the user goes to /auth/google/callback, which sends the request to passport to authenticate the user(exchanges the generated code for their profile info (handshake id))
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    //
+    app.get(
+        '/auth/google/callback', 
+        passport.authenticate('google'),
+        (req, res) => {
+            //response has a redirect function tied to it, that redirects browser to the /surveys route, after user finishes oauthflow
+            res.redirect('/surveys');
+        }
+        );
 
     app.get('/api/logout', (req, res) => {
         req.logout();
