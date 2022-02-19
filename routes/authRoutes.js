@@ -15,7 +15,7 @@ module.exports = app => {
         '/auth/google/callback', 
         passport.authenticate('google'),
         (req, res) => {
-            //response has a redirect function tied to it, that redirects browser to the /surveys route, after user finishes oauthflow
+            //response has a redirect function tied to it, that redirects browser to the /surveys route, which takes user to the Dashboard component after user finishes oauthflow
             res.redirect('/surveys');
         }
         );
